@@ -4,11 +4,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../core/common/result.dart';
 import '../../../core/constants/constants.dart';
-import '../../../core/utilities/platform_wrapper.dart';
-import '../../../firebase_options.dart';
 import '../../models/user_model.dart';
 import '../interfaces/auth_datasource.dart';
 
+/// Firebase/Google auth implementation (used only when [AppConfig.useFirebase] is true).
 class AuthRemoteDataSourceImpl implements AuthDataSource {
   final firebase_auth.FirebaseAuth firebaseAuth;
   final GoogleSignIn googleSignIn;
@@ -19,10 +18,9 @@ class AuthRemoteDataSourceImpl implements AuthDataSource {
   });
 
   @override
-  Future<Result<UserModel>> signInWithGoogle() async {
+  Future<Result<UserModel>> signIn({required String email, required String name}) async {
     try {
       await googleSignIn.initialize(
-        clientId: PlatformWrapper().isIOS ? DefaultFirebaseOptions.ios.iosClientId : null,
         serverClientId: Constants.googleServerClientId,
       );
 

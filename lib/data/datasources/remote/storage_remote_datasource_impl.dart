@@ -6,9 +6,16 @@ import '../../../core/common/result.dart';
 import '../interfaces/storage_datasource.dart';
 
 class StorageRemoteDataSourceImpl implements StorageDataSource {
-  final FirebaseStorage _firebaseStorage;
+  final FirebaseStorage? _storage;
 
-  StorageRemoteDataSourceImpl(this._firebaseStorage);
+  StorageRemoteDataSourceImpl(this._storage);
+
+  FirebaseStorage get _firebaseStorage {
+    final storage = _storage;
+    if (storage == null) throw StateError('Firebase is disabled');
+
+    return storage;
+  }
 
   @override
   Future<Result<String>> uploadUserPhoto(String imgPath) async {

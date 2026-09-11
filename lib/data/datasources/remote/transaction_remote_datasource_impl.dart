@@ -8,9 +8,16 @@ import '../../models/user_model.dart';
 import '../interfaces/transaction_datasource.dart';
 
 class TransactionRemoteDatasourceImpl extends TransactionDatasource {
-  final FirebaseFirestore _firebaseFirestore;
+  final FirebaseFirestore? _firestore;
 
-  TransactionRemoteDatasourceImpl(this._firebaseFirestore);
+  TransactionRemoteDatasourceImpl(this._firestore);
+
+  FirebaseFirestore get _firebaseFirestore {
+    final db = _firestore;
+    if (db == null) throw StateError('Firebase is disabled');
+
+    return db;
+  }
 
   @override
   Future<Result<int>> createTransaction(TransactionModel transaction) async {

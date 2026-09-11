@@ -1,19 +1,19 @@
 import '../../../../core/common/result.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
-import '../datasources/remote/auth_remote_datasource_impl.dart';
+import '../datasources/interfaces/auth_datasource.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSourceImpl authRemoteDataSource;
+  final AuthDataSource authDataSource;
 
   AuthRepositoryImpl({
-    required this.authRemoteDataSource,
+    required this.authDataSource,
   });
 
   @override
-  Future<Result<UserEntity>> signInWithGoogle() async {
+  Future<Result<UserEntity>> signIn({required String email, required String name}) async {
     try {
-      final res = await authRemoteDataSource.signInWithGoogle();
+      final res = await authDataSource.signIn(email: email, name: name);
       if (res.isFailure) return Result.failure(error: res.error!);
 
       return Result.success(data: res.data!.toEntity());
@@ -25,7 +25,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Result<void>> signOut() async {
     try {
-      final res = await authRemoteDataSource.signOut();
+      final res = await authDataSource.signOut();
       if (res.isFailure) return Result.failure(error: res.error!);
 
       return Result.success(data: null);
@@ -37,7 +37,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Result<UserEntity?>> getCurrentUser() async {
     try {
-      final res = await authRemoteDataSource.getCurrentUser();
+      final res = await authDataSource.getCurrentUser();
       if (res.isFailure) return Result.failure(error: res.error!);
 
       return Result.success(data: res.data?.toEntity());

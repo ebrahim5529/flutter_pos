@@ -5,6 +5,7 @@ import '../../../core/common/result.dart';
 import '../../../core/utilities/console_logger.dart';
 import '../../../domain/usecases/auth_usecases.dart';
 import '../../../domain/usecases/params/no_param.dart';
+import '../../../domain/usecases/params/sign_in_param.dart';
 import '../../../domain/usecases/user_usecases.dart';
 import 'auth_state.dart';
 
@@ -33,11 +34,11 @@ class AuthNotifier extends Notifier<AuthState> {
     }
   }
 
-  Future<Result<String>> signIn() async {
+  Future<Result<String>> signIn({required String email, required String name}) async {
     final authRepository = ref.read(authRepositoryProvider);
     final userRepository = ref.read(userRepositoryProvider);
 
-    var res = await SignInWithGoogleUsecase(authRepository).call(NoParam());
+    var res = await SignInUsecase(authRepository).call(SignInParam(email: email, name: name));
     if (res.isFailure) return Result.failure(error: res.error!);
 
     var createRes = await CreateUserUsecase(userRepository).call(res.data!);

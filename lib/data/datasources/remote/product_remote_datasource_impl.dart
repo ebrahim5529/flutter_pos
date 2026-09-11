@@ -5,9 +5,16 @@ import '../../models/product_model.dart';
 import '../interfaces/product_datasource.dart';
 
 class ProductRemoteDatasourceImpl extends ProductDatasource {
-  final FirebaseFirestore _firebaseFirestore;
+  final FirebaseFirestore? _firestore;
 
-  ProductRemoteDatasourceImpl(this._firebaseFirestore);
+  ProductRemoteDatasourceImpl(this._firestore);
+
+  FirebaseFirestore get _firebaseFirestore {
+    final db = _firestore;
+    if (db == null) throw StateError('Firebase is disabled');
+
+    return db;
+  }
 
   @override
   Future<Result<int>> createProduct(ProductModel product) async {

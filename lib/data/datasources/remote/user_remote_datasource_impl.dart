@@ -5,9 +5,16 @@ import '../../models/user_model.dart';
 import '../interfaces/user_datasource.dart';
 
 class UserRemoteDatasourceImpl extends UserDatasource {
-  final FirebaseFirestore _firebaseFirestore;
+  final FirebaseFirestore? _firestore;
 
-  UserRemoteDatasourceImpl(this._firebaseFirestore);
+  UserRemoteDatasourceImpl(this._firestore);
+
+  FirebaseFirestore get _firebaseFirestore {
+    final db = _firestore;
+    if (db == null) throw StateError('Firebase is disabled');
+
+    return db;
+  }
 
   @override
   Future<Result<String>> createUser(UserModel user) async {

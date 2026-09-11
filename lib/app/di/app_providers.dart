@@ -7,11 +7,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/constants/app_config.dart';
 import '../../core/services/connectivity/ping_service.dart';
 import '../../core/services/database/database_service.dart';
 import '../../core/services/info/device_info_service.dart';
 import '../../core/services/logger/error_logger_service.dart';
 import '../../core/services/printer/printer_service.dart';
+import '../../data/datasources/local/auth_local_datasource_impl.dart';
 import '../../data/datasources/local/product_local_datasource_impl.dart';
 import '../../data/datasources/local/queued_action_local_datasource_impl.dart';
 import '../../data/datasources/local/transaction_local_datasource_impl.dart';
@@ -41,10 +43,26 @@ final sharedPreferencesProvider = Provider<SharedPreferences>(
 );
 
 // Third parties
-final firebaseFirestoreProvider = Provider<FirebaseFirestore>((ref) => FirebaseFirestore.instance);
-final firebaseStorageProvider = Provider<FirebaseStorage>((ref) => FirebaseStorage.instance);
-final firebaseCrashlyticsProvider = Provider<FirebaseCrashlytics>((ref) => FirebaseCrashlytics.instance);
-final firebaseAuthProvider = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
+final firebaseFirestoreProvider = Provider<FirebaseFirestore?>((ref) {
+  if (!AppConfig.useFirebase) return null;
+
+  return FirebaseFirestore.instance;
+});
+final firebaseStorageProvider = Provider<FirebaseStorage?>((ref) {
+  if (!AppConfig.useFirebase) return null;
+
+  return FirebaseStorage.instance;
+});
+final firebaseCrashlyticsProvider = Provider<FirebaseCrashlytics?>((ref) {
+  if (!AppConfig.useFirebase) return null;
+
+  return FirebaseCrashlytics.instance;
+});
+final firebaseAuthProvider = Provider<FirebaseAuth?>((ref) {
+  if (!AppConfig.useFirebase) return null;
+
+  return FirebaseAuth.instance;
+});
 final googleSignInProvider = Provider<GoogleSignIn>((ref) => GoogleSignIn.instance);
 final deviceInfoPluginProvider = Provider<DeviceInfoPlugin>((ref) => DeviceInfoPlugin());
 
@@ -53,7 +71,15 @@ final appRoutesProvider = Provider<AppRoutes>((ref) => AppRoutes(ref));
 
 // Services
 final databaseServiceProvider = Provider<DatabaseService>((ref) => DatabaseService.instance);
-final pingServiceProvider = Provider<PingService>((ref) => PingService());
+final pingServiceProvider = Provider<PingService>((ref) {
+  final pingService = PingService();
+
+  if (!AppConfig.useFirebase) {
+    pingService.forceOffline = true;
+  }
+
+  return pingService;
+});
 final deviceInfoServiceProvider = Provider<DeviceInfoService>(
   (ref) => DeviceInfoService(ref.watch(deviceInfoPluginProvider)),
 );
@@ -78,13 +104,20 @@ final userLocalDatasourceProvider = Provider<UserLocalDatasourceImpl>(
 final queuedActionLocalDatasourceProvider = Provider<QueuedActionLocalDatasourceImpl>(
   (ref) => QueuedActionLocalDatasourceImpl(ref.watch(databaseServiceProvider)),
 );
+final authLocalDataSourceProvider = Provider<AuthLocalDatasourceImpl>(
+  (ref) => AuthLocalDatasourceImpl(ref.watch(sharedPreferencesProvider)),
+);
 
 // Remote Datasources
-final authRemoteDataSourceProvider = Provider<AuthRemoteDataSourceImpl>(
-  (ref) => AuthRemoteDataSourceImpl(
-    firebaseAuth: ref.watch(firebaseAuthProvider),
-    googleSignIn: ref.watch(googleSignInProvider),
-  ),
+final authRemoteDataSourceProvider = Provider<AuthRemoteDataSourceImpl?>(
+  (ref) {
+    if (!AppConfig.useFirebase) return null;
+
+    return AuthRemoteDataSourceImpl(
+      firebaseAuth: ref.watch(firebaseAuthProvider)!,
+      googleSignIn: ref.watch(googleSignInProvider),
+    );
+  },
 );
 final storageRemoteDataSourceProvider = Provider<StorageRemoteDataSourceImpl>(
   (ref) => StorageRemoteDataSourceImpl(ref.watch(firebaseStorageProvider)),
@@ -102,7 +135,7 @@ final userRemoteDatasourceProvider = Provider<UserRemoteDatasourceImpl>(
 // Repositories
 final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepositoryImpl(
-    authRemoteDataSource: ref.watch(authRemoteDataSourceProvider),
+    authDataSource: ref.watch(authLocalDataSourceProvider),
   ),
 );
 final storageRepositoryProvider = Provider<StorageRepository>(

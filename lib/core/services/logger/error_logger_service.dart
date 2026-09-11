@@ -5,7 +5,7 @@ import '../../utilities/debug_mode_wrapper.dart';
 
 /// Global error logging service
 class ErrorLoggerService {
-  final FirebaseCrashlytics _crashlytics;
+  final FirebaseCrashlytics? _crashlytics;
   final DebugModeWrapper _debugMode;
 
   ErrorLoggerService(
@@ -13,7 +13,7 @@ class ErrorLoggerService {
     DebugModeWrapper? debugMode,
   }) : _debugMode = debugMode ?? DebugModeWrapper();
 
-  /// Log error to Firebase Crashlytics
+  /// Log error to console (and Firebase Crashlytics when available)
   void log({
     required Object error,
     StackTrace? stackTrace,
@@ -24,8 +24,10 @@ class ErrorLoggerService {
     // Always log to console in debug mode
     ce(error, title: title, message: message, state: state);
 
-    if (!_debugMode.isDebugMode) {
-      _crashlytics.recordError(error, stackTrace);
+    final crashlytics = _crashlytics;
+
+    if (crashlytics != null && !_debugMode.isDebugMode) {
+      crashlytics.recordError(error, stackTrace);
     }
   }
 }
