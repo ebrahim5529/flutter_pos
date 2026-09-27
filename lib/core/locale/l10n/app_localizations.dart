@@ -221,7 +221,7 @@ abstract class AppLocalizations {
   /// No description provided for @about.
   ///
   /// In en, this message translates to:
-  /// **'About'**
+  /// **'About Me'**
   String get about;
 
   /// No description provided for @darkMode.
@@ -536,6 +536,12 @@ abstract class AppLocalizations {
   /// **'Edit Profile'**
   String get editProfile;
 
+  /// No description provided for @profileImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile Image'**
+  String get profileImage;
+
   /// No description provided for @phoneNumber.
   ///
   /// In en, this message translates to:
@@ -637,6 +643,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Transaction'**
   String get transaction;
+
+  /// No description provided for @productsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Products'**
+  String productsCount(int count);
+
+  /// No description provided for @perPiece.
+  ///
+  /// In en, this message translates to:
+  /// **'/pcs'**
+  String get perPiece;
 
   /// No description provided for @productsTotal.
   ///
@@ -806,41 +824,113 @@ abstract class AppLocalizations {
   /// **'Select options'**
   String get selectOptions;
 
-  /// No description provided for @aboutDescription.
+  /// No description provided for @developerName.
   ///
   /// In en, this message translates to:
-  /// **'A Point of Sale (POS) application built with Flutter, demonstrating Clean Architecture principles and offline-first design patterns.'**
-  String get aboutDescription;
+  /// **'Ibrahim Hamza Ibrahim Al-Madani'**
+  String get developerName;
 
-  /// No description provided for @aboutLocal.
+  /// No description provided for @developerRole.
   ///
   /// In en, this message translates to:
-  /// **'This project stores products, transactions, and account data locally with SQLite, so the point of sale keeps working without a cloud backend.'**
-  String get aboutLocal;
+  /// **'System Analyst & Full Stack Developer'**
+  String get developerRole;
+
+  /// No description provided for @aboutIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'I work in systems analysis and the development of web applications and administrative systems, with a particular focus on designing systems that scale and stay easy to use.'**
+  String get aboutIntro;
+
+  /// No description provided for @aboutExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'I have experience analyzing system requirements and turning business needs into complete technical solutions, from system analysis and database design, through interface design and backend and frontend development, to operating and supporting the system.'**
+  String get aboutExperience;
+
+  /// No description provided for @aboutPosTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About the Point of Sales System'**
+  String get aboutPosTitle;
+
+  /// No description provided for @aboutPosBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This system was developed to provide a practical solution for managing sales and point-of-sale operations, with a focus on ease of use, organized data, and support for the daily work of commercial businesses.'**
+  String get aboutPosBody;
+
+  /// No description provided for @aboutPosFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'The system helps manage sales, products, customers, users, and reports, with a design that can grow and take on more features in the future.'**
+  String get aboutPosFeatures;
+
+  /// No description provided for @aboutSkillsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Technologies & Expertise'**
+  String get aboutSkillsTitle;
+
+  /// No description provided for @aboutSkills.
+  ///
+  /// In en, this message translates to:
+  /// **'System Analysis & Requirements Engineering\nDatabase Design & ERD\nFull Stack Web Development\nPHP / Laravel\nJavaScript / TypeScript\nReact / Next.js\nMySQL\nREST APIs\nUI/UX & Responsive Design\nAI-Assisted Software Development'**
+  String get aboutSkills;
+
+  /// No description provided for @aboutContactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get aboutContactTitle;
+
+  /// No description provided for @mobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile'**
+  String get mobile;
+
+  /// No description provided for @aboutPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'0111638872'**
+  String get aboutPhone;
+
+  /// No description provided for @aboutEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'ebrahim5529@gmail.com'**
+  String get aboutEmail;
+
+  /// No description provided for @aboutVisionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Vision'**
+  String get aboutVisionTitle;
+
+  /// No description provided for @aboutVision.
+  ///
+  /// In en, this message translates to:
+  /// **'My goal is to build practical technical systems that help organizations and businesses improve their operations, reduce manual work, and organize data in a way that makes decisions easier.'**
+  String get aboutVision;
 
   /// No description provided for @developedBy.
   ///
   /// In en, this message translates to:
-  /// **'Developed with ❤️ by'**
+  /// **'Developed by Ibrahim Hamza Ibrahim Al-Madani'**
   String get developedBy;
+
+  /// No description provided for @copyright.
+  ///
+  /// In en, this message translates to:
+  /// **'© 2026 All Rights Reserved'**
+  String get copyright;
 
   /// No description provided for @versionLabel.
   ///
   /// In en, this message translates to:
   /// **'version {version}'**
   String versionLabel(String version);
-
-  /// No description provided for @github.
-  ///
-  /// In en, this message translates to:
-  /// **'GitHub'**
-  String get github;
-
-  /// No description provided for @website.
-  ///
-  /// In en, this message translates to:
-  /// **'Website'**
-  String get website;
 
   /// No description provided for @flutterPos.
   ///

@@ -2,9 +2,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unified_esc_pos_printer/unified_esc_pos_printer.dart';
 
 import '../../../app/di/app_providers.dart';
+import '../../../app/routes/app_routes.dart';
 import '../../../core/constants/constants.dart';
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../widgets/app_snack_bar.dart';
 import 'printer_settings_state.dart';
+
+String _printerDisconnectedMessage() {
+  final context = AppRoutes.rootNavigatorKey.currentContext;
+
+  if (context == null) {
+    return 'Printer disconnected';
+  }
+
+  return AppLocalizations.of(context).printerDisconnected;
+}
 
 final printerSettingsNotifierProvider = NotifierProvider.autoDispose<PrinterSettingsNotifier, PrinterSettingsState>(
   PrinterSettingsNotifier.new,
@@ -121,7 +133,7 @@ class PrinterSettingsNotifier extends AutoDisposeNotifier<PrinterSettingsState> 
 
     await sharedPreferences.remove(Constants.selectedDeviceIdKey);
     await sharedPreferences.remove(Constants.selectedConnectionTypeKey);
-    AppSnackBar.show('Printer disconnected');
+    AppSnackBar.show(_printerDisconnectedMessage());
   }
 
   bool isConnectingPrinter(PrinterDevice device) {

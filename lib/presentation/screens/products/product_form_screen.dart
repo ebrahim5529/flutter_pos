@@ -60,6 +60,7 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
   }
 
   void onTapImage() async {
+    final cropTitle = AppLocalizations.of(context).cropPhoto;
     final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       imageQuality: 50,
@@ -71,8 +72,8 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
       sourcePath: pickedFile.path,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
-        AndroidUiSettings(toolbarTitle: AppLocalizations.of(context).cropPhoto),
-        IOSUiSettings(title: AppLocalizations.of(context).cropPhoto),
+        AndroidUiSettings(toolbarTitle: cropTitle),
+        IOSUiSettings(title: cropTitle),
       ],
     );
 
@@ -132,7 +133,9 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.id == null ? AppLocalizations.of(context).createProduct : AppLocalizations.of(context).editProduct),
+        title: Text(
+          widget.id == null ? AppLocalizations.of(context).createProduct : AppLocalizations.of(context).editProduct,
+        ),
         titleSpacing: 0,
       ),
       body: !isLoaded

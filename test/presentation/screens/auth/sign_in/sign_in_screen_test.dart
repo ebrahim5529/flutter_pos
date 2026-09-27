@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pos/app/di/app_providers.dart';
 import 'package:flutter_pos/app/routes/app_routes.dart';
+import 'package:flutter_pos/core/locale/app_locale.dart';
+import 'package:flutter_pos/core/locale/l10n/app_localizations.dart';
 import 'package:flutter_pos/domain/entities/user_entity.dart' hide AuthProvider;
 import 'package:flutter_pos/presentation/providers/auth/auth_notifier.dart';
 import 'package:flutter_pos/presentation/providers/auth/auth_state.dart';
@@ -37,6 +39,12 @@ void main() {
         builder: (context, ref, _) {
           routes = ref.watch(appRoutesProvider);
           return MaterialApp.router(
+            locale: const Locale('en'),
+            supportedLocales: AppLocale.supportedLocales,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...AppLocale.localizationsDelegates,
+            ],
             routerConfig: routes.router,
           );
         },

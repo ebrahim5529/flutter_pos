@@ -52,6 +52,7 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
   }
 
   void onTapImage() async {
+    final cropTitle = AppLocalizations.of(context).cropPhoto;
     final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       imageQuality: 50,
@@ -63,8 +64,8 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
       sourcePath: pickedFile.path,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
-        AndroidUiSettings(toolbarTitle: AppLocalizations.of(context).cropPhoto),
-        IOSUiSettings(title: AppLocalizations.of(context).cropPhoto),
+        AndroidUiSettings(toolbarTitle: cropTitle),
+        IOSUiSettings(title: cropTitle),
       ],
     );
 

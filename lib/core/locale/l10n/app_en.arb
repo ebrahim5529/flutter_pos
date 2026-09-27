@@ -20,7 +20,7 @@
   "english": "English",
   "close": "Close",
   "printerSettings": "Printer Settings",
-  "about": "About",
+  "about": "About Me",
   "darkMode": "Dark Mode",
   "signOut": "Sign Out",
   "confirm": "Confirm",
@@ -107,6 +107,13 @@
   "back": "Back",
   "pay": "Pay",
   "transaction": "Transaction",
+  "productsCount": "{count} Products",
+  "@productsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "perPiece": "/pcs",
   "productsTotal": "{count} Products = {amount}",
   "@productsTotal": {
     "placeholders": {
@@ -141,17 +148,29 @@
   "nothingToShow": "Nothing to show",
   "pleaseWait": "Please wait",
   "selectOptions": "Select options",
-  "aboutDescription": "A Point of Sale (POS) application built with Flutter, demonstrating Clean Architecture principles and offline-first design patterns.",
-  "aboutLocal": "This project stores products, transactions, and account data locally with SQLite, so the point of sale keeps working without a cloud backend.",
-  "developedBy": "Developed with ❤️ by",
+  "developerName": "Ibrahim Hamza Ibrahim Al-Madani",
+  "developerRole": "System Analyst & Full Stack Developer",
+  "aboutIntro": "I work in systems analysis and the development of web applications and administrative systems, with a particular focus on designing systems that scale and stay easy to use.",
+  "aboutExperience": "I have experience analyzing system requirements and turning business needs into complete technical solutions, from system analysis and database design, through interface design and backend and frontend development, to operating and supporting the system.",
+  "aboutPosTitle": "About the Point of Sales System",
+  "aboutPosBody": "This system was developed to provide a practical solution for managing sales and point-of-sale operations, with a focus on ease of use, organized data, and support for the daily work of commercial businesses.",
+  "aboutPosFeatures": "The system helps manage sales, products, customers, users, and reports, with a design that can grow and take on more features in the future.",
+  "aboutSkillsTitle": "Technologies & Expertise",
+  "aboutSkills": "System Analysis & Requirements Engineering\nDatabase Design & ERD\nFull Stack Web Development\nPHP / Laravel\nJavaScript / TypeScript\nReact / Next.js\nMySQL\nREST APIs\nUI/UX & Responsive Design\nAI-Assisted Software Development",
+  "aboutContactTitle": "Contact",
+  "mobile": "Mobile",
+  "aboutPhone": "0111638872",
+  "aboutEmail": "ebrahim5529@gmail.com",
+  "aboutVisionTitle": "My Vision",
+  "aboutVision": "My goal is to build practical technical systems that help organizations and businesses improve their operations, reduce manual work, and organize data in a way that makes decisions easier.",
+  "developedBy": "Developed by Ibrahim Hamza Ibrahim Al-Madani",
+  "copyright": "© 2026 All Rights Reserved",
   "versionLabel": "version {version}",
   "@versionLabel": {
     "placeholders": {
       "version": {"type": "String"}
     }
   },
-  "github": "GitHub",
-  "website": "Website",
   "flutterPos": "Flutter POS",
   "addedAt": "Added at {date}",
   "@addedAt": {

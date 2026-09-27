@@ -42,7 +42,7 @@ class _OrderList extends ConsumerWidget {
     if (homeState.orderedProducts.isEmpty) {
       return SizedBox(
         height: AppSizes.screenHeight(context) - 272,
-        child: const AppEmptyState(
+        child: AppEmptyState(
           title: AppLocalizations.of(context).empty,
           subtitle: AppLocalizations.of(context).emptyCart,
         ),
@@ -102,7 +102,7 @@ class _OrderTotal extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Total (${homeState.orderedProducts.length})',
+            AppLocalizations.of(context).totalCount(homeState.orderedProducts.length),
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),

@@ -340,3 +340,13 @@ class _ProductItem extends StatelessWidget {
     );
   }
 }
+
+String _paymentMethodLabel(BuildContext context, String method) {
+  final l10n = AppLocalizations.of(context);
+
+  return switch (method.toLowerCase()) {
+    'cash' => l10n.cash,
+    'bank' => l10n.bank,
+    _ => method.toTitleCase(),
+  };
+}

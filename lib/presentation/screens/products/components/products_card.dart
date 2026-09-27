@@ -78,7 +78,7 @@ class ProductsCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      AppLocalizations.of(context).stockSold(product.stock, product.sold),
+                      AppLocalizations.of(context).stockSold(product.stock, product.sold ?? 0),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 8),
                     ),
                   ],

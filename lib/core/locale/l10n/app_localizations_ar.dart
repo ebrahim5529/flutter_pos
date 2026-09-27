@@ -69,7 +69,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get printerSettings => 'إعدادات الطابعة';
 
   @override
-  String get about => 'حول';
+  String get about => 'من أنا';
 
   @override
   String get darkMode => 'الوضع الداكن';
@@ -228,6 +228,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get editProfile => 'تعديل الملف الشخصي';
 
   @override
+  String get profileImage => 'صورة الملف الشخصي';
+
+  @override
   String get phoneNumber => 'رقم الهاتف';
 
   @override
@@ -283,6 +286,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get transaction => 'المعاملة';
+
+  @override
+  String productsCount(int count) {
+    return '$count منتجات';
+  }
+
+  @override
+  String get perPiece => '/قطعة';
 
   @override
   String productsTotal(int count, String amount) {
@@ -372,26 +383,66 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectOptions => 'اختر';
 
   @override
-  String get aboutDescription =>
-      'تطبيق نقاط بيع مبني بـ Flutter، ويعتمد على البنية النظيفة ويعمل محلياً دون الحاجة لاتصال دائم.';
+  String get developerName => 'إبراهيم حمزة إبراهيم المدني';
 
   @override
-  String get aboutLocal =>
-      'يحفظ هذا التطبيق المنتجات والمعاملات وبيانات الحساب محلياً في SQLite، فيستمر البيع دون خادم سحابي.';
+  String get developerRole => 'System Analyst & Full Stack Developer';
 
   @override
-  String get developedBy => 'طُوّر بحب بواسطة';
+  String get aboutIntro =>
+      'أعمل في مجال تحليل الأنظمة وتطوير تطبيقات الويب والأنظمة الإدارية، مع اهتمام خاص بتصميم الأنظمة القابلة للتوسع وسهلة الاستخدام.';
+
+  @override
+  String get aboutExperience =>
+      'لدي خبرة في تحليل متطلبات الأنظمة وتحويل احتياجات الأعمال إلى حلول تقنية متكاملة، بدءًا من تحليل النظام وقواعد البيانات، مرورًا بتصميم الواجهات وتطوير الـ Backend والـ Frontend، وحتى تشغيل النظام ودعمه.';
+
+  @override
+  String get aboutPosTitle => 'عن نظام Point of Sales';
+
+  @override
+  String get aboutPosBody =>
+      'تم تطوير هذا النظام لتوفير حل عملي لإدارة عمليات البيع ونقاط البيع، مع التركيز على سهولة الاستخدام، تنظيم البيانات، ودعم العمليات اليومية للمنشآت التجارية.';
+
+  @override
+  String get aboutPosFeatures =>
+      'يساعد النظام في إدارة المبيعات والمنتجات والعملاء والمستخدمين والتقارير، مع تصميم قابل للتطوير وإضافة المزيد من الخصائص مستقبلًا.';
+
+  @override
+  String get aboutSkillsTitle => 'التقنيات والخبرات';
+
+  @override
+  String get aboutSkills =>
+      'System Analysis & Requirements Engineering\nDatabase Design & ERD\nFull Stack Web Development\nPHP / Laravel\nJavaScript / TypeScript\nReact / Next.js\nMySQL\nREST APIs\nUI/UX & Responsive Design\nAI-Assisted Software Development';
+
+  @override
+  String get aboutContactTitle => 'التواصل';
+
+  @override
+  String get mobile => 'الجوال';
+
+  @override
+  String get aboutPhone => '0111638872';
+
+  @override
+  String get aboutEmail => 'ebrahim5529@gmail.com';
+
+  @override
+  String get aboutVisionTitle => 'رؤيتي';
+
+  @override
+  String get aboutVision =>
+      'هدفي هو بناء أنظمة تقنية عملية تساعد المؤسسات والمنشآت على تحسين عملياتها، تقليل العمل اليدوي، وتنظيم البيانات بطريقة تسهّل اتخاذ القرارات.';
+
+  @override
+  String get developedBy => 'طُوّر بواسطة إبراهيم حمزة إبراهيم المدني';
+
+  @override
+  String get copyright => '© 2026 جميع الحقوق محفوظة';
 
   @override
   String versionLabel(String version) {
     return 'الإصدار $version';
   }
-
-  @override
-  String get github => 'GitHub';
-
-  @override
-  String get website => 'الموقع';
 
   @override
   String get flutterPos => 'Flutter POS';

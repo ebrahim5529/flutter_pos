@@ -12,7 +12,7 @@ class AppTheme {
 
   AppTheme._();
 
-  Color _primaryColor = AppColors.orange;
+  Color _primaryColor = AppColors.blue;
   Color? _secondaryColor = AppColors.charcoal;
   Color? _tertiaryColor = AppColors.plum;
   Brightness _brightness = Brightness.light;

@@ -69,7 +69,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get printerSettings => 'Printer Settings';
 
   @override
-  String get about => 'About';
+  String get about => 'About Me';
 
   @override
   String get darkMode => 'Dark Mode';
@@ -229,6 +229,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editProfile => 'Edit Profile';
 
   @override
+  String get profileImage => 'Profile Image';
+
+  @override
   String get phoneNumber => 'Phone Number';
 
   @override
@@ -285,6 +288,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get transaction => 'Transaction';
+
+  @override
+  String productsCount(int count) {
+    return '$count Products';
+  }
+
+  @override
+  String get perPiece => '/pcs';
 
   @override
   String productsTotal(int count, String amount) {
@@ -375,26 +386,66 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectOptions => 'Select options';
 
   @override
-  String get aboutDescription =>
-      'A Point of Sale (POS) application built with Flutter, demonstrating Clean Architecture principles and offline-first design patterns.';
+  String get developerName => 'Ibrahim Hamza Ibrahim Al-Madani';
 
   @override
-  String get aboutLocal =>
-      'This project stores products, transactions, and account data locally with SQLite, so the point of sale keeps working without a cloud backend.';
+  String get developerRole => 'System Analyst & Full Stack Developer';
 
   @override
-  String get developedBy => 'Developed with ❤️ by';
+  String get aboutIntro =>
+      'I work in systems analysis and the development of web applications and administrative systems, with a particular focus on designing systems that scale and stay easy to use.';
+
+  @override
+  String get aboutExperience =>
+      'I have experience analyzing system requirements and turning business needs into complete technical solutions, from system analysis and database design, through interface design and backend and frontend development, to operating and supporting the system.';
+
+  @override
+  String get aboutPosTitle => 'About the Point of Sales System';
+
+  @override
+  String get aboutPosBody =>
+      'This system was developed to provide a practical solution for managing sales and point-of-sale operations, with a focus on ease of use, organized data, and support for the daily work of commercial businesses.';
+
+  @override
+  String get aboutPosFeatures =>
+      'The system helps manage sales, products, customers, users, and reports, with a design that can grow and take on more features in the future.';
+
+  @override
+  String get aboutSkillsTitle => 'Technologies & Expertise';
+
+  @override
+  String get aboutSkills =>
+      'System Analysis & Requirements Engineering\nDatabase Design & ERD\nFull Stack Web Development\nPHP / Laravel\nJavaScript / TypeScript\nReact / Next.js\nMySQL\nREST APIs\nUI/UX & Responsive Design\nAI-Assisted Software Development';
+
+  @override
+  String get aboutContactTitle => 'Contact';
+
+  @override
+  String get mobile => 'Mobile';
+
+  @override
+  String get aboutPhone => '0111638872';
+
+  @override
+  String get aboutEmail => 'ebrahim5529@gmail.com';
+
+  @override
+  String get aboutVisionTitle => 'My Vision';
+
+  @override
+  String get aboutVision =>
+      'My goal is to build practical technical systems that help organizations and businesses improve their operations, reduce manual work, and organize data in a way that makes decisions easier.';
+
+  @override
+  String get developedBy => 'Developed by Ibrahim Hamza Ibrahim Al-Madani';
+
+  @override
+  String get copyright => '© 2026 All Rights Reserved';
 
   @override
   String versionLabel(String version) {
     return 'version $version';
   }
-
-  @override
-  String get github => 'GitHub';
-
-  @override
-  String get website => 'Website';
 
   @override
   String get flutterPos => 'Flutter POS';

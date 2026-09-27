@@ -19,6 +19,22 @@ class ExternalLauncher {
     }
   }
 
+  static Future<void> openEmail(String email) async {
+    final uri = Uri(scheme: 'mailto', path: email);
+
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $uri');
+    }
+  }
+
+  static Future<void> openPhone(String phone) async {
+    final uri = Uri(scheme: 'tel', path: phone);
+
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $uri');
+    }
+  }
+
   static void openWhatsApp({
     required String phone,
     required String message,
