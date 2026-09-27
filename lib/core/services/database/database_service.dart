@@ -45,7 +45,6 @@ class DatabaseService {
       database.execute(DatabaseConfig.createProductTable),
       database.execute(DatabaseConfig.createTransactionTable),
       database.execute(DatabaseConfig.createOrderedProductTable),
-      database.execute(DatabaseConfig.createQueuedActionTable),
     ]);
   }
 
@@ -59,7 +58,6 @@ class DatabaseService {
       database.execute(DatabaseConfig.createProductTable),
       database.execute(DatabaseConfig.createTransactionTable),
       database.execute(DatabaseConfig.createOrderedProductTable),
-      database.execute(DatabaseConfig.createQueuedActionTable),
     ]);
   }
 

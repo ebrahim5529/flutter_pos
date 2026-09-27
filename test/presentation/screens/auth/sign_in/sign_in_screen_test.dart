@@ -21,8 +21,6 @@ void main() {
         MainState(
           isLoaded: false,
           isHasInternet: false,
-          isHasQueuedActions: false,
-          isSyncronizing: false,
           user: UserEntity(id: ''),
         );
 

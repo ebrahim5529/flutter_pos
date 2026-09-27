@@ -26,46 +26,6 @@ void main() {
     mockProductRepository = MockProductRepository();
   });
 
-  group('SyncAllUserProductsUsecase', () {
-    late SyncAllUserProductsUsecase usecase;
-
-    setUp(() {
-      usecase = SyncAllUserProductsUsecase(mockProductRepository);
-    });
-
-    test('should sync all user products successfully', () async {
-      // arrange
-      const userId = 'user123';
-      const syncedCount = 10;
-      final result = Result<int>.success(data: syncedCount);
-
-      when(mockProductRepository.syncAllUserProducts(userId)).thenAnswer((_) async => result);
-
-      // act
-      final response = await usecase.call(userId);
-
-      // assert
-      expect(response, result);
-      verify(mockProductRepository.syncAllUserProducts(userId));
-      verifyNoMoreInteractions(mockProductRepository);
-    });
-
-    test('should return failure when sync fails', () async {
-      // arrange
-      const userId = 'user123';
-      final result = Result<int>.failure(error: 'Sync failed');
-
-      when(mockProductRepository.syncAllUserProducts(userId)).thenAnswer((_) async => result);
-
-      // act
-      final response = await usecase.call(userId);
-
-      // assert
-      expect(response, result);
-      verify(mockProductRepository.syncAllUserProducts(userId));
-    });
-  });
-
   group('GetUserProductsUsecase', () {
     late GetUserProductsUsecase usecase;
 

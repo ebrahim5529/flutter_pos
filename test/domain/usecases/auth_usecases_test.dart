@@ -3,6 +3,7 @@ import 'package:flutter_pos/domain/entities/user_entity.dart';
 import 'package:flutter_pos/domain/repositories/auth_repository.dart';
 import 'package:flutter_pos/domain/usecases/auth_usecases.dart';
 import 'package:flutter_pos/domain/usecases/params/no_param.dart';
+import 'package:flutter_pos/domain/usecases/params/sign_in_param.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -33,11 +34,13 @@ void main() {
     mockAuthRepository = MockAuthRepository();
   });
 
-  group('SignInWithGoogleUsecase', () {
-    late SignInWithGoogleUsecase usecase;
+  group('SignInUsecase', () {
+    late SignInUsecase usecase;
+
+    const params = SignInParam(email: 'john@example.com', name: 'John Doe');
 
     setUp(() {
-      usecase = SignInWithGoogleUsecase(mockAuthRepository);
+      usecase = SignInUsecase(mockAuthRepository);
     });
 
     test('should return user from repository on successful sign in', () async {
@@ -49,14 +52,14 @@ void main() {
       );
       final result = Result<UserEntity>.success(data: user);
 
-      when(mockAuthRepository.signInWithGoogle()).thenAnswer((_) async => result);
+      when(mockAuthRepository.signIn(email: params.email, name: params.name)).thenAnswer((_) async => result);
 
       // act
-      final response = await usecase.call(NoParam());
+      final response = await usecase.call(params);
 
       // assert
       expect(response, result);
-      verify(mockAuthRepository.signInWithGoogle());
+      verify(mockAuthRepository.signIn(email: params.email, name: params.name));
       verifyNoMoreInteractions(mockAuthRepository);
     });
 
@@ -64,14 +67,14 @@ void main() {
       // arrange
       final result = Result<UserEntity>.failure(error: 'Sign in failed');
 
-      when(mockAuthRepository.signInWithGoogle()).thenAnswer((_) async => result);
+      when(mockAuthRepository.signIn(email: params.email, name: params.name)).thenAnswer((_) async => result);
 
       // act
-      final response = await usecase.call(NoParam());
+      final response = await usecase.call(params);
 
       // assert
       expect(response, result);
-      verify(mockAuthRepository.signInWithGoogle());
+      verify(mockAuthRepository.signIn(email: params.email, name: params.name));
       verifyNoMoreInteractions(mockAuthRepository);
     });
   });

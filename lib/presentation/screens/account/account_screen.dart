@@ -313,13 +313,6 @@ class _SignOutButton extends ConsumerWidget {
             onTapRightButton: (context) async {
               context.pop();
 
-              final isSyncronizing = ref.read(mainNotifierProvider).isSyncronizing;
-
-              if (isSyncronizing) {
-                AppSnackBar.showError('Cannot sign out while synchronizing data is in progress. Please wait a moment.');
-                return;
-              }
-
               final res = await AppDialog.showProgress(() async {
                 return ref.read(authNotifierProvider.notifier).signOut();
               });

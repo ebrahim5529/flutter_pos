@@ -29,20 +29,10 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final isLoaded = ref.watch(mainNotifierProvider.select((p) => p.isLoaded));
-    final isHasInternet = ref.watch(mainNotifierProvider.select((p) => p.isHasInternet));
-    final user = ref.watch(mainNotifierProvider.select((p) => p.user));
 
     // Display RootScreen when data is being load
     if (!isLoaded) {
       return const WelcomeScreen();
-    }
-
-    // User data might still null for the first time app open or login without internet connection
-    // So, throw error with a first time internet error message then the [ErrorScreen] will be shown
-    if (isLoaded && user == null && !isHasInternet) {
-      throw Exception(
-        'No Internet connection! Internet connection is required for the first time app open or user login',
-      );
     }
 
     return Scaffold(

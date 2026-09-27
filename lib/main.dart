@@ -6,19 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app.dart';
 import 'app/di/app_providers.dart';
-import 'core/constants/app_config.dart';
 import 'core/services/database/database_service.dart';
 
 void main() async {
   // Initialize binding
   WidgetsFlutterBinding.ensureInitialized();
-
-  if (AppConfig.useFirebase) {
-    throw StateError(
-      'Firebase is enabled but not bootstrapped. '
-      'Generate lib/firebase_options.dart with `flutterfire configure` and restore Firebase.initializeApp in main.dart.',
-    );
-  }
 
   // Initialize app local db
   await DatabaseService.instance.init();

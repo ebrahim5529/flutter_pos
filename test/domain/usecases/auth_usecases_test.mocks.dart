@@ -34,13 +34,16 @@ class MockAuthRepository extends _i1.Mock implements _i2.AuthRepository {
   }
 
   @override
-  _i3.Future<_i4.Result<_i5.UserEntity>> signInWithGoogle() =>
+  _i3.Future<_i4.Result<_i5.UserEntity>> signIn({
+    required String? email,
+    required String? name,
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#signInWithGoogle, []),
+            Invocation.method(#signIn, [], {#email: email, #name: name}),
             returnValue: _i3.Future<_i4.Result<_i5.UserEntity>>.value(
               _i6.dummyValue<_i4.Result<_i5.UserEntity>>(
                 this,
-                Invocation.method(#signInWithGoogle, []),
+                Invocation.method(#signIn, [], {#email: email, #name: name}),
               ),
             ),
           )

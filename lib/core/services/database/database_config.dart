@@ -9,7 +9,6 @@ class DatabaseConfig {
   static const String productTableName = 'Product';
   static const String transactionTableName = 'Transaction';
   static const String orderedProductTableName = 'OrderedProduct';
-  static const String queuedActionTableName = 'QueuedAction';
 
   static const String createUserTable =
       '''
@@ -81,18 +80,6 @@ CREATE TABLE IF NOT EXISTS '$orderedProductTableName' (
     PRIMARY KEY ('id'),
     FOREIGN KEY ('transactionId') REFERENCES 'Transaction' ('id'),
     FOREIGN KEY ('productId') REFERENCES 'Product' ('id')
-);
-''';
-
-  static const String createQueuedActionTable =
-      '''
-CREATE TABLE IF NOT EXISTS '$queuedActionTableName' (
-    'id' INTEGER NOT NULL,
-    'repository' TEXT,
-    'method' TEXT,
-    'param' TEXT,
-    'isCritical' INTEGER,
-    'createdAt' DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 ''';
 }

@@ -1,46 +1,49 @@
-import '../../../../core/common/result.dart';
-import '../../core/services/connectivity/ping_service.dart';
+import 'dart:io';
+
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+
+import '../../core/common/result.dart';
 import '../../domain/repositories/storage_repository.dart';
-import '../datasources/remote/storage_remote_datasource_impl.dart';
 
 class StorageRepositoryImpl implements StorageRepository {
-  final PingService pingService;
-  final StorageRemoteDataSourceImpl storageRemoteDataSource;
+  StorageRepositoryImpl({Future<Directory> Function()? documentsDirectory})
+    : _documentsDirectory = documentsDirectory ?? getApplicationDocumentsDirectory;
 
-  StorageRepositoryImpl({
-    required this.pingService,
-    required this.storageRemoteDataSource,
-  });
+  final Future<Directory> Function() _documentsDirectory;
 
-  @override
-  Future<Result<String>> uploadUserPhoto(String imgPath) async {
+  Future<Result<String>> _saveImage(String imgPath, String folder) async {
     try {
-      if (!pingService.isConnected) {
-        return Result.failure(error: 'Please check your internet connection and try again');
+      final source = File(imgPath);
+
+      if (!await source.exists()) {
+        return Result.failure(error: 'Image file not found');
       }
 
-      final res = await storageRemoteDataSource.uploadUserPhoto(imgPath);
-      if (res.isFailure) return Result.failure(error: res.error!);
+      final documentsDir = await _documentsDirectory();
+      final directory = Directory(p.join(documentsDir.path, folder));
 
-      return Result.success(data: res.data!);
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+
+      final fileName = '${DateTime.now().millisecondsSinceEpoch}_${p.basename(imgPath)}';
+      final saved = await source.copy(p.join(directory.path, fileName));
+
+      return Result.success(data: saved.path);
     } catch (e) {
       return Result.failure(error: e);
     }
   }
 
   @override
-  Future<Result<String>> uploadProductImage(String imgPath) async {
-    try {
-      if (!pingService.isConnected) {
-        return Result.failure(error: 'Please check your internet connection and try again');
-      }
+  Future<Result<String>> uploadUserPhoto(String imgPath) => _saveImage(imgPath, 'user_photos');
 
-      final res = await storageRemoteDataSource.uploadProductImage(imgPath);
-      if (res.isFailure) return Result.failure(error: res.error!);
+  @override
+  Future<Result<String?>> uploadProductImage(String imgPath) async {
+    final result = await _saveImage(imgPath, 'product_images');
+    if (result.isFailure) return Result.failure(error: result.error!);
 
-      return Result.success(data: res.data!);
-    } catch (e) {
-      return Result.failure(error: e);
-    }
+    return Result.success(data: result.data);
   }
 }

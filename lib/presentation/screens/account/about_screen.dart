@@ -81,7 +81,7 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               const SizedBox(height: AppSizes.padding * 2),
               Text(
-                "This project serves as a learning resource and reference implementation for building Flutter apps with proper architecture and automatic data synchronization between local storage (SQLite) and cloud database (Firestore).\n\nThe app prioritizes local-first operations, storing all data in SQLite and automatically syncing with Firestore when online. When offline, all user actions (create, update, delete) are recorded as QueuedActions in the local database and automatically executed in sequence when internet connectivity is restored.",
+                "This project stores products, transactions, and account data locally with SQLite, so the point of sale keeps working without a cloud backend.",
                 textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.bodySmall,
               ),

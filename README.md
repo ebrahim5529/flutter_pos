@@ -5,9 +5,7 @@
 
 > 🚀 This project is the base model of [Zirel POS](https://zirelpos.com/). If you want a ready-to-use, feature-complete POS app, you might want to check it out, it's free, no card required.
 
-A Point of Sale (POS) application built with Flutter, demonstrating **Clean Architecture** principles and **offline-first** design patterns. This project serves as a learning resource and reference implementation for building Flutter apps with proper architecture and automatic data synchronization between local storage (SQLite) and cloud database (Firestore).
-
-The app prioritizes local-first operations, storing all data in SQLite and automatically syncing with Firestore when online. When offline, all user actions (create, update, delete) are recorded as `QueuedActions` in the local database and automatically executed in sequence when internet connectivity is restored.
+A Point of Sale (POS) application built with Flutter, demonstrating **Clean Architecture** principles and local-first storage. Products, transactions, and accounts are stored in SQLite on the device.
 
 <br/>
 <p align="left">
@@ -29,14 +27,12 @@ The app prioritizes local-first operations, storing all data in SQLite and autom
 - **Product Management**: Full CRUD operations for products with image upload support
 - **Sales Transactions**: POS interface with cart management and transaction history
 - **Thermal Receipt Printing**: Print transaction receipts via USB, Bluetooth, BLE, or network printers with configurable paper sizes (58mm, 72mm, 80mm)
-- **User Authentication**: Firebase Authentication with Google Sign-In integration
+- **User Authentication**: Local sign-in stored on the device
 - **Account Management**: User profile management and settings
 
 ### Technical Implementation
 
-- **Offline-First Architecture**: Works seamlessly without internet connection
-- **Automatic Data Sync**: SQLite ↔ Firestore bidirectional synchronization
-- **Queued Actions**: Automatic retry mechanism for offline operations (create, update, delete)
+- **Local Storage**: Works without a cloud backend
 - **Clean Architecture**: Separation between presentation, domain, and data layers
 - **State Management**: Riverpod (migrated from Provider) for safer, more testable state management
 - **Dependency Injection**: Centralized DI setup for better code organization
@@ -80,8 +76,7 @@ flutter_pos/
 │   ├── data/                         # Data layer
 │   │   ├── datasources/              # Data sources
 │   │   │   ├── interfaces/           # Datasource interfaces
-│   │   │   ├── local/                # Local datasources (sqflite)
-│   │   │   └── remote/               # Remote datasources (Firestore, Firebase Auth)
+│   │   │   └── local/                # Local datasources (sqflite)
 │   │   ├── models/                   # Data models with JSON serialization
 │   │   └── repositories/             # Repository implementations
 │   │
@@ -109,7 +104,6 @@ flutter_pos/
 │   │   │   └── transactions/         # Transaction history screens
 │   │   └── widgets/                  # Reusable UI components
 │   │
-│   ├── firebase_options.dart         # Firebase configuration
 │   └── main.dart                     # App entry point
 │
 ├── test/                             # Unit and widget tests
@@ -139,7 +133,6 @@ flutter_pos/
 
 - [Flutter](https://flutter.dev/docs/get-started/install)
 - [Dart](https://dart.dev/get-dart)
-- Firebase account for backend services
 
 ### Installation
 
@@ -156,53 +149,9 @@ flutter_pos/
    flutter pub get
    ```
 
-3. **Set up Firebase:**
-   - Create a new project on [Firebase](https://firebase.google.com/).
-   - Follow the instructions to add Firebase to your Flutter app [here](https://firebase.google.com/docs/flutter/setup).
-   - Enable google authentication provider
-   - Update cloud firestore rules to allow read write operation
-     <br/>
-
-   ```
-   service cloud.firestore {
-     match /databases/{database}/documents {
-       match /{document=**} {
-         allow read, write: if request.auth != null;
-       }
-     }
-   }
-   ```
-
-   - Add cloud firestore indexes to enable query
-     <br/>
-     <img src="docs/firestore_indexes.png" alt="Cloud Firestore Indexes" width=800px>
-     <br/>
-     <br/>
-   - Update firebase storage rules to allow read write operation
-     <br/>
-
-   ```
-   service firebase.storage {
-     match /b/{bucket}/o {
-       match /{allPaths=**} {
-         allow read, write: if request.auth != null;
-       }
-     }
-   }
-   ```
-
-4. **Set up your `config.json` file**
-   <br/> `GOOGLE_SERVER_CLIENT_ID` is `Web client ID` that you can get from your Firebase Google sign-in method provider
-
-   ```
-   {
-     "GOOGLE_SERVER_CLIENT_ID": "xxxxxxxxxxxxx.apps.googleusercontent.com"
-   }
-   ```
-
-5. **Run the application:**
+3. **Run the application:**
    ```sh
-   flutter run --dart-define-from-file config.json
+   flutter run
    ```
 
 ### Test

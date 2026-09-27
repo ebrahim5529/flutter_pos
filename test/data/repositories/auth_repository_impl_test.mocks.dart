@@ -3,16 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i5;
 
-import 'package:firebase_auth/firebase_auth.dart' as _i2;
-import 'package:flutter_pos/core/common/result.dart' as _i7;
-import 'package:flutter_pos/data/datasources/remote/auth_remote_datasource_impl.dart' as _i5;
-import 'package:flutter_pos/data/models/user_model.dart' as _i8;
-import 'package:flutter_pos/domain/entities/user_entity.dart' as _i4;
-import 'package:google_sign_in/google_sign_in.dart' as _i3;
+import 'package:flutter_pos/core/common/result.dart' as _i6;
+import 'package:flutter_pos/data/datasources/interfaces/auth_datasource.dart' as _i4;
+import 'package:flutter_pos/data/models/user_model.dart' as _i7;
+import 'package:flutter_pos/domain/entities/user_entity.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i9;
+import 'package:mockito/src/dummies.dart' as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -28,92 +26,65 @@ import 'package:mockito/src/dummies.dart' as _i9;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeFirebaseAuth_0 extends _i1.SmartFake implements _i2.FirebaseAuth {
-  _FakeFirebaseAuth_0(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
+class _FakeUserEntity_0 extends _i1.SmartFake implements _i3.UserEntity {
+  _FakeUserEntity_0(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
 }
 
-class _FakeGoogleSignIn_1 extends _i1.SmartFake implements _i3.GoogleSignIn {
-  _FakeGoogleSignIn_1(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
-}
-
-class _FakeUserEntity_2 extends _i1.SmartFake implements _i4.UserEntity {
-  _FakeUserEntity_2(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
-}
-
-/// A class which mocks [AuthRemoteDataSourceImpl].
+/// A class which mocks [AuthDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRemoteDataSourceImpl extends _i1.Mock implements _i5.AuthRemoteDataSourceImpl {
-  MockAuthRemoteDataSourceImpl() {
+class MockAuthDataSource extends _i1.Mock implements _i4.AuthDataSource {
+  MockAuthDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.FirebaseAuth get firebaseAuth =>
+  _i5.Future<_i6.Result<_i7.UserModel>> signIn({
+    required String? email,
+    required String? name,
+  }) =>
       (super.noSuchMethod(
-            Invocation.getter(#firebaseAuth),
-            returnValue: _FakeFirebaseAuth_0(
-              this,
-              Invocation.getter(#firebaseAuth),
-            ),
-          )
-          as _i2.FirebaseAuth);
-
-  @override
-  _i3.GoogleSignIn get googleSignIn =>
-      (super.noSuchMethod(
-            Invocation.getter(#googleSignIn),
-            returnValue: _FakeGoogleSignIn_1(
-              this,
-              Invocation.getter(#googleSignIn),
-            ),
-          )
-          as _i3.GoogleSignIn);
-
-  @override
-  _i6.Future<_i7.Result<_i8.UserModel>> signInWithGoogle() =>
-      (super.noSuchMethod(
-            Invocation.method(#signInWithGoogle, []),
-            returnValue: _i6.Future<_i7.Result<_i8.UserModel>>.value(
-              _i9.dummyValue<_i7.Result<_i8.UserModel>>(
+            Invocation.method(#signIn, [], {#email: email, #name: name}),
+            returnValue: _i5.Future<_i6.Result<_i7.UserModel>>.value(
+              _i8.dummyValue<_i6.Result<_i7.UserModel>>(
                 this,
-                Invocation.method(#signInWithGoogle, []),
+                Invocation.method(#signIn, [], {#email: email, #name: name}),
               ),
             ),
           )
-          as _i6.Future<_i7.Result<_i8.UserModel>>);
+          as _i5.Future<_i6.Result<_i7.UserModel>>);
 
   @override
-  _i6.Future<_i7.Result<void>> signOut() =>
+  _i5.Future<_i6.Result<void>> signOut() =>
       (super.noSuchMethod(
             Invocation.method(#signOut, []),
-            returnValue: _i6.Future<_i7.Result<void>>.value(
-              _i9.dummyValue<_i7.Result<void>>(
+            returnValue: _i5.Future<_i6.Result<void>>.value(
+              _i8.dummyValue<_i6.Result<void>>(
                 this,
                 Invocation.method(#signOut, []),
               ),
             ),
           )
-          as _i6.Future<_i7.Result<void>>);
+          as _i5.Future<_i6.Result<void>>);
 
   @override
-  _i6.Future<_i7.Result<_i8.UserModel?>> getCurrentUser() =>
+  _i5.Future<_i6.Result<_i7.UserModel?>> getCurrentUser() =>
       (super.noSuchMethod(
             Invocation.method(#getCurrentUser, []),
-            returnValue: _i6.Future<_i7.Result<_i8.UserModel?>>.value(
-              _i9.dummyValue<_i7.Result<_i8.UserModel?>>(
+            returnValue: _i5.Future<_i6.Result<_i7.UserModel?>>.value(
+              _i8.dummyValue<_i6.Result<_i7.UserModel?>>(
                 this,
                 Invocation.method(#getCurrentUser, []),
               ),
             ),
           )
-          as _i6.Future<_i7.Result<_i8.UserModel?>>);
+          as _i5.Future<_i6.Result<_i7.UserModel?>>);
 }
 
 /// A class which mocks [UserModel].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserModel extends _i1.Mock implements _i8.UserModel {
+class MockUserModel extends _i1.Mock implements _i7.UserModel {
   MockUserModel() {
     _i1.throwOnMissingStub(this);
   }
@@ -122,7 +93,7 @@ class MockUserModel extends _i1.Mock implements _i8.UserModel {
   String get id =>
       (super.noSuchMethod(
             Invocation.getter(#id),
-            returnValue: _i9.dummyValue<String>(this, Invocation.getter(#id)),
+            returnValue: _i8.dummyValue<String>(this, Invocation.getter(#id)),
           )
           as String);
 
@@ -195,21 +166,21 @@ class MockUserModel extends _i1.Mock implements _i8.UserModel {
           as Map<String, dynamic>);
 
   @override
-  _i4.UserEntity toEntity() =>
+  _i3.UserEntity toEntity() =>
       (super.noSuchMethod(
             Invocation.method(#toEntity, []),
-            returnValue: _FakeUserEntity_2(
+            returnValue: _FakeUserEntity_0(
               this,
               Invocation.method(#toEntity, []),
             ),
           )
-          as _i4.UserEntity);
+          as _i3.UserEntity);
 }
 
 /// A class which mocks [UserEntity].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserEntity extends _i1.Mock implements _i4.UserEntity {
+class MockUserEntity extends _i1.Mock implements _i3.UserEntity {
   MockUserEntity() {
     _i1.throwOnMissingStub(this);
   }
@@ -218,7 +189,7 @@ class MockUserEntity extends _i1.Mock implements _i4.UserEntity {
   String get id =>
       (super.noSuchMethod(
             Invocation.getter(#id),
-            returnValue: _i9.dummyValue<String>(this, Invocation.getter(#id)),
+            returnValue: _i8.dummyValue<String>(this, Invocation.getter(#id)),
           )
           as String);
 
@@ -226,7 +197,7 @@ class MockUserEntity extends _i1.Mock implements _i4.UserEntity {
   List<Object?> get props => (super.noSuchMethod(Invocation.getter(#props), returnValue: <Object?>[]) as List<Object?>);
 
   @override
-  _i4.UserEntity copyWith({
+  _i3.UserEntity copyWith({
     String? id,
     String? phone,
     String? email,
@@ -234,7 +205,7 @@ class MockUserEntity extends _i1.Mock implements _i4.UserEntity {
     String? gender,
     String? birthdate,
     String? imageUrl,
-    _i4.AuthProvider? authProvider,
+    _i3.AuthProvider? authProvider,
     String? createdAt,
     String? updatedAt,
   }) =>
@@ -251,7 +222,7 @@ class MockUserEntity extends _i1.Mock implements _i4.UserEntity {
               #createdAt: createdAt,
               #updatedAt: updatedAt,
             }),
-            returnValue: _FakeUserEntity_2(
+            returnValue: _FakeUserEntity_0(
               this,
               Invocation.method(#copyWith, [], {
                 #id: id,
@@ -267,5 +238,5 @@ class MockUserEntity extends _i1.Mock implements _i4.UserEntity {
               }),
             ),
           )
-          as _i4.UserEntity);
+          as _i3.UserEntity);
 }

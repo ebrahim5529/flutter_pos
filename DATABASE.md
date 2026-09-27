@@ -64,14 +64,3 @@ Database: SQLite (`app_database.db`), version: 1
 | price         | INTEGER  |                           |
 | createdAt     | DATETIME | DEFAULT CURRENT_TIMESTAMP |
 | updatedAt     | DATETIME | DEFAULT CURRENT_TIMESTAMP |
-
-### QueuedAction
-
-| Column     | Type     | Constraints               |
-| ---------- | -------- | ------------------------- |
-| id         | INTEGER  | NOT NULL                  |
-| repository | TEXT     |                           |
-| method     | TEXT     |                           |
-| param      | TEXT     |                           |
-| isCritical | INTEGER  | (0 = false, 1 = true)     |
-| createdAt  | DATETIME | DEFAULT CURRENT_TIMESTAMP |

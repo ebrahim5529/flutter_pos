@@ -20,7 +20,6 @@ class UserLocalDatasourceImpl extends UserDatasource {
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
 
-      // The id is uid from GoogleSignIn credential
       return Result.success(data: user.id);
     } catch (e) {
       return Result.failure(error: e);

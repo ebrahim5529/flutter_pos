@@ -16,9 +16,6 @@ class PingService {
 
   bool _isProcessStarted = false;
 
-  /// When true, [isConnected] is always false (local-only / no Firebase mode).
-  bool forceOffline = false;
-
   final List<int> _pingLatencies = [];
   final List<String> _pingLines = [];
 
@@ -28,10 +25,6 @@ class PingService {
   bool _previousStatus = false;
 
   bool get isConnected {
-    if (forceOffline) {
-      return false;
-    }
-
     if (_pingLatencies.isEmpty) {
       return false; // No latencies to check, assume not connected
     }
