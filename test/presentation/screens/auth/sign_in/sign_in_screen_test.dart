@@ -53,7 +53,8 @@ void main() {
       // assert
       expect(find.text('Welcome!'), findsOneWidget);
       expect(find.text('Welcome to Flutter POS app'), findsOneWidget);
-      expect(find.text('Sign In With Google'), findsOneWidget);
+      expect(find.text('Sign In'), findsOneWidget);
+      expect(find.byType(TextField), findsNWidgets(2));
     });
 
     testWidgets('should display sign in button', (tester) async {
@@ -62,7 +63,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // assert
-      final button = find.text('Sign In With Google');
+      final button = find.text('Sign In');
       expect(button, findsOneWidget);
     });
   });
