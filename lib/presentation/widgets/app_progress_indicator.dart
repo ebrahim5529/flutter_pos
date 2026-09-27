@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../../core/locale/l10n/app_localizations.dart';
 import '../../core/themes/app_sizes.dart';
 
 // App Progress Indicator
 class AppProgressIndicator extends StatelessWidget {
   final double fontSize;
   final bool showMessage;
-  final String message;
+  final String? message;
 
   const AppProgressIndicator({
     super.key,
     this.fontSize = 10,
     this.showMessage = true,
-    this.message = 'Please wait',
+    this.message,
   });
 
   @override
@@ -35,7 +36,7 @@ class AppProgressIndicator extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: AppSizes.padding),
                 child: Text(
-                  message,
+                  message ?? AppLocalizations.of(context).pleaseWait,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: fontSize),
                 ),
               ),

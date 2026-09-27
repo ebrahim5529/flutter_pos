@@ -1,6 +1,7 @@
 import 'package:app_image/app_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/locale/l10n/app_localizations.dart';
 import '../../../../core/themes/app_sizes.dart';
 import '../../../../core/utilities/currency_formatter.dart';
 import '../../../../domain/entities/product_entity.dart';
@@ -77,7 +78,7 @@ class ProductsCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      'Stock ${product.stock}  |  Sold ${product.sold}',
+                      AppLocalizations.of(context).stockSold(product.stock, product.sold),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 8),
                     ),
                   ],
@@ -130,7 +131,7 @@ class _OutOfStock extends StatelessWidget {
               const SizedBox(width: 4),
               Flexible(
                 child: Text(
-                  'Out of stock',
+                  AppLocalizations.of(context).outOfStock,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: Theme.of(context).colorScheme.outline,

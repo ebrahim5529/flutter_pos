@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/locale/l10n/app_localizations.dart';
 import '../../core/themes/app_sizes.dart';
 
 class AppDropDown<T> extends StatelessWidget {
@@ -175,7 +176,9 @@ class _MultiSelectDropDown<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedValues = dropdown.selectedValues ?? <T>{};
     final isEmpty = selectedValues.isEmpty;
-    final label = isEmpty ? dropdown.hintText ?? 'Select options' : dropdown.multiSelectLabel(selectedValues);
+    final label = isEmpty
+        ? dropdown.hintText ?? AppLocalizations.of(context).selectOptions
+        : dropdown.multiSelectLabel(selectedValues);
 
     return PopupMenuButton<T>(
       enabled: dropdown.enabled,

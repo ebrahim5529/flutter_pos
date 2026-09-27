@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/di/app_providers.dart';
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../providers/main/main_notifier.dart';
 import '../welcome/welcome_screen.dart';
 
@@ -35,25 +36,27 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       return const WelcomeScreen();
     }
 
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.maps_home_work_outlined),
-            label: 'Home',
+            icon: const Icon(Icons.maps_home_work_outlined),
+            label: l10n.home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_customize_outlined),
-            label: 'Products',
+            icon: const Icon(Icons.dashboard_customize_outlined),
+            label: l10n.products,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_long_rounded),
-            label: 'Transactions',
+            icon: const Icon(Icons.receipt_long_rounded),
+            label: l10n.transactions,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: 'Account',
+            icon: const Icon(Icons.account_circle_outlined),
+            label: l10n.account,
           ),
         ],
         currentIndex: _calculateSelectedIndex(),

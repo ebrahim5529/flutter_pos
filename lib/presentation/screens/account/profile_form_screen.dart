@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../../core/themes/app_sizes.dart';
 import '../../providers/account/account_notifier.dart';
 import '../../providers/main/main_notifier.dart';
@@ -62,8 +63,8 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
       sourcePath: pickedFile.path,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
-        AndroidUiSettings(toolbarTitle: 'Crop Photo'),
-        IOSUiSettings(title: 'Crop Photo'),
+        AndroidUiSettings(toolbarTitle: AppLocalizations.of(context).cropPhoto),
+        IOSUiSettings(title: AppLocalizations.of(context).cropPhoto),
       ],
     );
 
@@ -81,7 +82,7 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
     if (res.isSuccess) {
       if (!mounted) return;
       Navigator.of(context).pop();
-      AppSnackBar.show('Profile updated');
+      AppSnackBar.show(AppLocalizations.of(context).profileUpdated);
 
       // Refresh user data
       ref.read(mainNotifierProvider.notifier).loadCurrentUser();
@@ -98,7 +99,7 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: Text(AppLocalizations.of(context).editProfile),
         titleSpacing: 0,
       ),
       body: !isLoaded
@@ -134,7 +135,7 @@ class _ImageSection extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Profile Image',
+          AppLocalizations.of(context).profileImage,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -195,8 +196,8 @@ class _NameField extends StatelessWidget {
       padding: const EdgeInsets.only(top: AppSizes.padding),
       child: AppTextField(
         controller: controller,
-        labelText: 'Name',
-        hintText: 'Your name...',
+        labelText: AppLocalizations.of(context).name,
+        hintText: AppLocalizations.of(context).yourNameHint,
         onChanged: onChanged,
       ),
     );
@@ -218,8 +219,8 @@ class _EmailField extends StatelessWidget {
       padding: const EdgeInsets.only(top: AppSizes.padding),
       child: AppTextField(
         controller: controller,
-        labelText: 'Email',
-        hintText: 'Your email...',
+        labelText: AppLocalizations.of(context).email,
+        hintText: AppLocalizations.of(context).yourEmailHint,
         onChanged: onChanged,
       ),
     );
@@ -241,8 +242,8 @@ class _PhoneField extends StatelessWidget {
       padding: const EdgeInsets.only(top: AppSizes.padding),
       child: AppTextField(
         controller: controller,
-        labelText: 'Phone Number',
-        hintText: 'Your phone number...',
+        labelText: AppLocalizations.of(context).phoneNumber,
+        hintText: AppLocalizations.of(context).yourPhoneHint,
         keyboardType: TextInputType.number,
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         onChanged: onChanged,
@@ -264,7 +265,7 @@ class _UpdateButton extends StatelessWidget {
         bottom: AppSizes.padding * 2,
       ),
       child: AppButton(
-        text: 'Update',
+        text: AppLocalizations.of(context).update,
         onTap: onTap,
       ),
     );

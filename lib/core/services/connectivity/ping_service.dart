@@ -85,7 +85,7 @@ class PingService {
       int? exitCode = await _process?.exitCode;
       cl('Ping process stopped. exitCode: $exitCode');
     } catch (e) {
-      throw Exception('Error starting ping process: $e');
+      cl('Ping process failed: $e');
     } finally {
       // Always cleanup, whether success or error
       _process = null;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/routes/params/error_screen_param.dart';
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../../core/themes/app_sizes.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_error_widget.dart';
@@ -28,7 +29,7 @@ class ErrorScreen extends StatelessWidget {
               borderColor: Theme.of(context).colorScheme.surfaceContainerLowest,
               textColor: Theme.of(context).colorScheme.primary,
               alignment: null,
-              text: 'Back to home',
+              text: AppLocalizations.of(context).backToHome,
               onTap: () {
                 // Go back to default initial route
                 context.go('/home');

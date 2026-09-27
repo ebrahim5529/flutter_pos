@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/di/app_providers.dart';
 import '../../../core/extensions/string_casing_extension.dart';
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_sizes.dart';
 import '../../../core/utilities/currency_formatter.dart';
@@ -38,7 +39,7 @@ class TransactionDetailScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.print_outlined),
-            tooltip: 'Reprint',
+            tooltip: AppLocalizations.of(context).reprint,
             onPressed: () => _reprint(ref),
           ),
         ],
@@ -55,7 +56,7 @@ class TransactionDetailScreen extends ConsumerWidget {
           }
 
           if (snapshot.data == null) {
-            return const AppEmptyState(title: 'Not Found');
+            return AppEmptyState(title: AppLocalizations.of(context).notFound);
           }
 
           final transaction = snapshot.data!;
@@ -93,7 +94,7 @@ class _StatusSection extends StatelessWidget {
         ),
         const SizedBox(height: AppSizes.padding / 2),
         Text(
-          'Transaction Created',
+          AppLocalizations.of(context).transactionCreated,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
@@ -124,7 +125,7 @@ class _TransactionDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Transaction ID',
+                AppLocalizations.of(context).transactionId,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -142,11 +143,11 @@ class _TransactionDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Payment Method',
+                AppLocalizations.of(context).paymentMethod,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
-                transaction.paymentMethod.toTitleCase(),
+                _paymentMethodLabel(context, transaction.paymentMethod),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
@@ -156,7 +157,7 @@ class _TransactionDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Created By',
+                AppLocalizations.of(context).createdBy,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
@@ -170,7 +171,7 @@ class _TransactionDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Created At',
+                AppLocalizations.of(context).createdAt,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
@@ -184,7 +185,7 @@ class _TransactionDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Customer Name',
+                AppLocalizations.of(context).customerName,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
@@ -198,7 +199,7 @@ class _TransactionDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Description',
+                AppLocalizations.of(context).description,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
@@ -233,7 +234,7 @@ class _PaymentDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Ordered Products',
+                AppLocalizations.of(context).orderedProducts,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -258,7 +259,7 @@ class _PaymentDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Total',
+                AppLocalizations.of(context).total,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -276,7 +277,7 @@ class _PaymentDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Payment Received',
+                AppLocalizations.of(context).paymentReceived,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
@@ -290,7 +291,7 @@ class _PaymentDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Change',
+                AppLocalizations.of(context).change,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(

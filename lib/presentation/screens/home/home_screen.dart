@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../../core/themes/app_sizes.dart';
 import '../../../domain/entities/product_entity.dart';
 import '../../providers/home/home_notifier.dart';
@@ -166,8 +167,8 @@ class _Body extends ConsumerWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 140),
                         child: AppEmptyState(
-                          subtitle: 'No products available, add product to continue',
-                          buttonText: 'Add Product',
+                          subtitle: AppLocalizations.of(context).noProducts,
+                          buttonText: AppLocalizations.of(context).addProduct,
                           onTapButton: () => context.push('/products/product-create'),
                         ),
                       ),
@@ -256,23 +257,39 @@ class _NetworkInfo extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isHasInternet = ref.watch(mainNotifierProvider.select((provider) => provider.isHasInternet));
+    final l10n = AppLocalizations.of(context);
+    final color = isHasInternet ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.outline;
 
     return Padding(
-      padding: const EdgeInsets.only(right: AppSizes.padding),
+      padding: const EdgeInsetsDirectional.only(end: AppSizes.padding / 2),
       child: AppButton(
-        height: 26,
+        height: 22,
         borderRadius: BorderRadius.circular(4),
-        padding: const EdgeInsets.symmetric(horizontal: AppSizes.padding / 2),
+        padding: const EdgeInsets.symmetric(horizontal: AppSizes.padding / 3),
         buttonColor: isHasInternet
             ? Theme.of(context).colorScheme.surfaceContainer
             : Theme.of(context).colorScheme.shadow.withValues(alpha: 0.06),
-        child: Icon(
-          isHasInternet ? Icons.wifi_rounded : Icons.wifi_off_rounded,
-          size: 12,
-          color: isHasInternet ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.outline,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              isHasInternet ? Icons.wifi_rounded : Icons.wifi_off_rounded,
+              size: 12,
+              color: color,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              isHasInternet ? l10n.online : l10n.offline,
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                color: color,
+              ),
+            ),
+          ],
         ),
         onTap: () {
-          AppSnackBar.show(isHasInternet ? 'Online mode' : 'No internet connection, running in offline mode');
+          AppSnackBar.show(isHasInternet ? l10n.onlineMessage : l10n.offlineMessage);
         },
       ),
     );
@@ -288,7 +305,7 @@ class _SearchField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppTextField(
       controller: controller,
-      hintText: 'Search Products...',
+      hintText: AppLocalizations.of(context).searchProducts,
       type: AppTextFieldType.search,
       textInputAction: TextInputAction.search,
       onEditingComplete: () {
@@ -318,8 +335,10 @@ class _ProductCard extends ConsumerWidget {
 
         int currentQty = homeState.orderedProducts.where((e) => e.productId == product.id).firstOrNull?.quantity ?? 0;
 
+        final l10n = AppLocalizations.of(context);
+
         AppDialog.show(
-          title: 'Enter Amount',
+          title: l10n.enterAmount,
           child: OrderCard(
             name: product.name,
             imageUrl: product.imageUrl,
@@ -330,8 +349,8 @@ class _ProductCard extends ConsumerWidget {
               currentQty = val;
             },
           ),
-          rightButtonText: 'Add To Cart',
-          leftButtonText: 'Cancel',
+          rightButtonText: l10n.addToCart,
+          leftButtonText: l10n.cancel,
           onTapLeftButton: (context) {
             context.pop();
           },

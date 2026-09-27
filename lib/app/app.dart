@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/locale/app_locale.dart';
+import '../core/locale/l10n/app_localizations.dart';
+import '../presentation/providers/locale/locale_notifier.dart';
 import '../presentation/providers/theme/theme_notifier.dart';
 import 'di/app_providers.dart';
 import 'error/error_handler_builder.dart';
@@ -13,6 +15,7 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeNotifierProvider.select((s) => s.themeData));
+    final locale = ref.watch(localeNotifierProvider);
     final router = ref.watch(appRoutesProvider).router;
 
     return MaterialApp.router(
@@ -20,9 +23,12 @@ class App extends ConsumerWidget {
       theme: theme,
       debugShowCheckedModeBanner: kDebugMode,
       routerConfig: router,
-      locale: AppLocale.defaultLocale,
+      locale: locale,
       supportedLocales: AppLocale.supportedLocales,
-      localizationsDelegates: AppLocale.localizationsDelegates,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        ...AppLocale.localizationsDelegates,
+      ],
       builder: (context, child) => ErrorHandlerBuilder(child: child),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../../core/locale/l10n/app_localizations.dart';
 import '../../../../core/themes/app_sizes.dart';
 import '../../../../core/utilities/currency_formatter.dart';
 import '../../../providers/home/home_notifier.dart';
@@ -42,8 +43,8 @@ class _OrderList extends ConsumerWidget {
       return SizedBox(
         height: AppSizes.screenHeight(context) - 272,
         child: const AppEmptyState(
-          title: 'Empty',
-          subtitle: 'No products added to cart',
+          title: AppLocalizations.of(context).empty,
+          subtitle: AppLocalizations.of(context).emptyCart,
         ),
       );
     }

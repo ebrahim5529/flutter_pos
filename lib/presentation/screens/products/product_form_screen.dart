@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../../core/themes/app_sizes.dart';
 import '../../providers/products/product_form_notifier.dart';
 import '../../widgets/app_button.dart';
@@ -70,8 +71,8 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
       sourcePath: pickedFile.path,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
-        AndroidUiSettings(toolbarTitle: 'Crop Photo'),
-        IOSUiSettings(title: 'Crop Photo'),
+        AndroidUiSettings(toolbarTitle: AppLocalizations.of(context).cropPhoto),
+        IOSUiSettings(title: AppLocalizations.of(context).cropPhoto),
       ],
     );
 
@@ -89,7 +90,7 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
     if (res.isSuccess) {
       if (!mounted) return;
       context.go('/products');
-      AppSnackBar.show('Product created');
+      AppSnackBar.show(AppLocalizations.of(context).productCreated);
     } else {
       AppDialog.showError(error: res.error?.toString());
     }
@@ -103,7 +104,7 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
     if (res.isSuccess) {
       if (!mounted) return;
       context.pop();
-      AppSnackBar.show('Product updated');
+      AppSnackBar.show(AppLocalizations.of(context).productUpdated);
     } else {
       AppDialog.showError(error: res.error?.toString());
     }
@@ -117,7 +118,7 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
     if (res.isSuccess) {
       if (!mounted) return;
       context.go('/products');
-      AppSnackBar.show('Product deleted');
+      AppSnackBar.show(AppLocalizations.of(context).productDeleted);
     } else {
       AppDialog.showError(error: res.error?.toString());
     }
@@ -131,7 +132,7 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.id == null ? 'Create Product' : 'Edit Product'),
+        title: Text(widget.id == null ? AppLocalizations.of(context).createProduct : AppLocalizations.of(context).editProduct),
         titleSpacing: 0,
       ),
       body: !isLoaded
@@ -188,7 +189,7 @@ class _ImageSection extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Product Image',
+          AppLocalizations.of(context).productImage,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -249,8 +250,8 @@ class _NameField extends StatelessWidget {
       padding: const EdgeInsets.only(top: AppSizes.padding),
       child: AppTextField(
         controller: controller,
-        labelText: 'Name',
-        hintText: 'Product name...',
+        labelText: AppLocalizations.of(context).name,
+        hintText: AppLocalizations.of(context).productNameHint,
         onChanged: onChanged,
       ),
     );
@@ -272,8 +273,8 @@ class _PriceField extends StatelessWidget {
       padding: const EdgeInsets.only(top: AppSizes.padding),
       child: AppTextField(
         controller: controller,
-        labelText: 'Price',
-        hintText: 'Product price...',
+        labelText: AppLocalizations.of(context).price,
+        hintText: AppLocalizations.of(context).productPriceHint,
         type: AppTextFieldType.currency,
         onChanged: onChanged,
       ),
@@ -296,8 +297,8 @@ class _StockField extends StatelessWidget {
       padding: const EdgeInsets.only(top: AppSizes.padding),
       child: AppTextField(
         controller: controller,
-        labelText: 'Stock',
-        hintText: 'Product stock...',
+        labelText: AppLocalizations.of(context).stock,
+        hintText: AppLocalizations.of(context).productStockHint,
         keyboardType: TextInputType.number,
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         onChanged: onChanged,
@@ -321,8 +322,8 @@ class _DescriptionField extends StatelessWidget {
       padding: const EdgeInsets.only(top: AppSizes.padding),
       child: AppTextField(
         controller: controller,
-        labelText: 'Description',
-        hintText: 'Product description...',
+        labelText: AppLocalizations.of(context).description,
+        hintText: AppLocalizations.of(context).productDescriptionHint,
         maxLines: 4,
         onChanged: onChanged,
       ),
@@ -352,7 +353,7 @@ class _CreateOrUpdateButton extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(top: AppSizes.padding * 1.5),
       child: AppButton(
-        text: id == null ? 'Add Product' : 'Update Product',
+        text: id == null ? AppLocalizations.of(context).addProduct : AppLocalizations.of(context).updateProduct,
         enabled: isFormValid,
         onTap: () {
           if (id != null) {
@@ -385,15 +386,15 @@ class _DeleteButton extends StatelessWidget {
         bottom: AppSizes.padding * 2,
       ),
       child: AppButton(
-        text: 'Delete',
+        text: AppLocalizations.of(context).delete,
         textColor: Theme.of(context).colorScheme.error,
         buttonColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         onTap: () {
           AppDialog.show(
-            title: 'Confirm',
-            text: 'Are you sure want to delete this product?',
-            leftButtonText: 'Cancel',
-            rightButtonText: 'Delete',
+            title: AppLocalizations.of(context).confirm,
+            text: AppLocalizations.of(context).deleteProductConfirm,
+            leftButtonText: AppLocalizations.of(context).cancel,
+            rightButtonText: AppLocalizations.of(context).delete,
             rightButtonColor: Theme.of(context).colorScheme.errorContainer,
             rightButtonTextColor: Theme.of(context).colorScheme.error,
             onTapRightButton: (context) async {

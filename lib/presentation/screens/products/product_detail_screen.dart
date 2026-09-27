@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../../core/themes/app_sizes.dart';
 import '../../../core/utilities/currency_formatter.dart';
 import '../../../core/utilities/date_time_formatter.dart';
@@ -23,7 +24,7 @@ class ProductDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Detail'),
+        title: Text(AppLocalizations.of(context).productDetail),
         titleSpacing: 0,
         actions: [_EditButton(id: id)],
       ),
@@ -39,7 +40,7 @@ class ProductDetailScreen extends ConsumerWidget {
           }
 
           if (snapshot.data == null) {
-            return const AppEmptyState(title: 'Not Found');
+            return AppEmptyState(title: AppLocalizations.of(context).notFound);
           }
 
           final product = snapshot.data!;
@@ -83,7 +84,7 @@ class _EditButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: AppSizes.padding),
+      padding: const EdgeInsetsDirectional.only(end: AppSizes.padding),
       child: AppButton(
         height: 26,
         borderRadius: BorderRadius.circular(4),
@@ -98,7 +99,7 @@ class _EditButton extends StatelessWidget {
             ),
             const SizedBox(width: AppSizes.padding / 4),
             Text(
-              'Edit Product',
+              AppLocalizations.of(context).editProduct,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
@@ -163,21 +164,21 @@ class _ProductName extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          productName ?? '(No name)',
+          productName ?? AppLocalizations.of(context).noProductName,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: AppSizes.padding / 2),
         Text(
-          "Added at ${DateTimeFormatter.stripDateWithClock(createdAt ?? '')}",
+          AppLocalizations.of(context).addedAt(DateTimeFormatter.stripDateWithClock(createdAt ?? '')),
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
             fontSize: 10,
             color: Theme.of(context).colorScheme.outline,
           ),
         ),
         Text(
-          "Last updated at ${DateTimeFormatter.stripDateWithClock(updatedAt ?? '')}",
+          AppLocalizations.of(context).lastUpdatedAt(DateTimeFormatter.stripDateWithClock(updatedAt ?? '')),
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
             fontSize: 10,
             color: Theme.of(context).colorScheme.outline,
@@ -201,7 +202,7 @@ class _ProductPrice extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Price",
+            AppLocalizations.of(context).price,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           Text(
@@ -229,7 +230,7 @@ class _ProductStock extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Stock",
+            AppLocalizations.of(context).stock,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           Text(
@@ -257,7 +258,7 @@ class _ProductSold extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Sold",
+            AppLocalizations.of(context).sold,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           Text(
@@ -285,11 +286,11 @@ class _ProductDescription extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Description",
+            AppLocalizations.of(context).description,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           Text(
-            description ?? '(No description)',
+            description ?? AppLocalizations.of(context).noDescription,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),

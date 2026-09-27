@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../../core/themes/app_sizes.dart';
 import '../../../domain/entities/product_entity.dart';
 import '../../providers/products/products_notifier.dart';
@@ -61,7 +62,7 @@ class _ProductsScreenState extends ConsumerState<ProductsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
+        title: Text(AppLocalizations.of(context).products),
         elevation: 0,
         shadowColor: Colors.transparent,
         actions: const [_AddButton()],
@@ -101,8 +102,8 @@ class _ProductsScreenState extends ConsumerState<ProductsScreen> {
                       hasScrollBody: false,
                       fillOverscroll: true,
                       child: AppEmptyState(
-                        subtitle: 'No products available, add product to continue',
-                        buttonText: 'Add Product',
+                        subtitle: AppLocalizations.of(context).noProducts,
+                        buttonText: AppLocalizations.of(context).addProduct,
                         onTapButton: () => context.push('/products/product-create'),
                       ),
                     );
@@ -142,7 +143,7 @@ class _AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: AppSizes.padding),
+      padding: const EdgeInsetsDirectional.only(end: AppSizes.padding),
       child: AppButton(
         height: 26,
         borderRadius: BorderRadius.circular(4),
@@ -157,7 +158,7 @@ class _AddButton extends StatelessWidget {
             ),
             const SizedBox(width: AppSizes.padding / 4),
             Text(
-              'Add Product',
+              AppLocalizations.of(context).addProduct,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
@@ -181,7 +182,7 @@ class _SearchField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppTextField(
       controller: controller,
-      hintText: 'Search Products...',
+      hintText: AppLocalizations.of(context).searchProducts,
       type: AppTextFieldType.search,
       textInputAction: TextInputAction.search,
       onEditingComplete: () {

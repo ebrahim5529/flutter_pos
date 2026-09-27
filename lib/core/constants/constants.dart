@@ -6,6 +6,7 @@ class Constants {
   static const String selectedConnectionTypeKey = 'selected_connection_type';
   static const String selectedPaperSizeKey = 'selected_paper_size';
   static const String selectedBrightnessKey = 'selected_brightness';
+  static const String selectedLocaleKey = 'selected_locale';
 
   // Non-critical error libraries that should be logged but not navigate to error screen
   static const nonCriticalErrorLibraries = {

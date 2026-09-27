@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../app/di/app_providers.dart';
 import '../../../../core/assets/assets.dart';
+import '../../../../core/locale/l10n/app_localizations.dart';
 import '../../../../core/themes/app_sizes.dart';
 import '../../../providers/auth/auth_notifier.dart';
 import '../../../widgets/app_button.dart';
@@ -34,6 +35,8 @@ class _WelcomeMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Expanded(
       child: Container(
         constraints: const BoxConstraints(maxWidth: 270),
@@ -47,13 +50,13 @@ class _WelcomeMessage extends StatelessWidget {
             ),
             const SizedBox(height: AppSizes.padding),
             Text(
-              'Welcome!',
+              l10n.welcome,
               style: Theme.of(context).textTheme.displaySmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              'Welcome to Flutter POS app',
+              l10n.welcomeSubtitle,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
@@ -87,7 +90,7 @@ class _SignInFormState extends ConsumerState<_SignInForm> {
     final name = _nameController.text;
 
     if (email.trim().isEmpty && name.trim().isEmpty) {
-      AppDialog.showError(error: 'Enter an email or name to continue');
+      AppDialog.showError(error: AppLocalizations.of(context).enterEmailOrName);
       return;
     }
 
@@ -107,28 +110,30 @@ class _SignInFormState extends ConsumerState<_SignInForm> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 400),
       child: Column(
         children: [
           AppTextField(
             controller: _emailController,
-            labelText: 'Email',
-            hintText: 'any@email.com',
+            labelText: l10n.email,
+            hintText: l10n.emailHint,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: AppSizes.padding),
           AppTextField(
             controller: _nameController,
-            labelText: 'Name',
-            hintText: 'Your name',
+            labelText: l10n.name,
+            hintText: l10n.yourName,
             textInputAction: TextInputAction.done,
             onEditingComplete: _onSignIn,
           ),
           const SizedBox(height: AppSizes.padding),
           AppButton(
-            text: 'Sign In',
+            text: l10n.signIn,
             onTap: _onSignIn,
           ),
         ],

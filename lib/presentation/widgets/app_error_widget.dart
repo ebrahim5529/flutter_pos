@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/locale/l10n/app_localizations.dart';
 import '../../core/themes/app_sizes.dart';
 import '../../core/utilities/console_logger.dart';
 
@@ -20,10 +21,12 @@ class AppErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     ce(error);
 
+    final l10n = AppLocalizations.of(context);
+
     if (textOnly) {
       return Text(
         message ??
-            'Something went wrong!\n${kDebugMode ? "${error is FlutterErrorDetails ? (error as FlutterErrorDetails).summary : error ?? '(No error details)'}" : ""}',
+            '${l10n.somethingWentWrong}\n${kDebugMode ? "${error is FlutterErrorDetails ? (error as FlutterErrorDetails).summary : error ?? '(No error details)'}" : ""}',
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyMedium,
       );
@@ -43,7 +46,7 @@ class AppErrorWidget extends StatelessWidget {
               ),
               const SizedBox(height: AppSizes.padding / 6),
               Text(
-                'Oops!',
+                l10n.oops,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.error,
@@ -51,7 +54,7 @@ class AppErrorWidget extends StatelessWidget {
               ),
               const SizedBox(height: AppSizes.padding / 4),
               Text(
-                message ?? 'Something went wrong.\nPlease try again later.',
+                message ?? l10n.somethingWentWrong,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),

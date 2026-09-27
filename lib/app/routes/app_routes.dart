@@ -55,8 +55,9 @@ class AppRoutes {
         final authState = _ref.read(authNotifierProvider);
         final isChecking = authState.isChecking;
         final isAuthenticated = authState.isAuthenticated;
-        final isSplashRoute = state.fullPath == '/';
-        final isAuthRoute = state.fullPath?.startsWith('/sign-in') ?? false;
+        final location = state.uri.path;
+        final isSplashRoute = location == '/';
+        final isAuthRoute = location.startsWith('/sign-in');
 
         if (isChecking) {
           return '/';

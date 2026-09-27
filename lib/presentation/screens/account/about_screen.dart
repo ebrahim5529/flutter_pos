@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../core/assets/assets.dart';
+import '../../../core/locale/l10n/app_localizations.dart';
 import '../../../core/themes/app_sizes.dart';
 import '../../../core/utilities/external_launcher.dart';
 
@@ -36,9 +37,11 @@ class _AboutScreenState extends State<AboutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About'),
+        title: Text(l10n.about),
         titleSpacing: 0,
       ),
       body: Center(
@@ -54,7 +57,7 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               const SizedBox(height: AppSizes.padding),
               Text(
-                'Flutter POS',
+                l10n.flutterPos,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
@@ -66,7 +69,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
               ),
               Text(
-                'version $version',
+                l10n.versionLabel(version),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   fontWeight: FontWeight.bold,
@@ -75,13 +78,13 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               const SizedBox(height: AppSizes.padding),
               Text(
-                'A Point of Sale (POS) application built with Flutter, demonstrating Clean Architecture principles and offline-first design patterns.',
+                l10n.aboutDescription,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: AppSizes.padding * 2),
               Text(
-                "This project stores products, transactions, and account data locally with SQLite, so the point of sale keeps working without a cloud backend.",
+                l10n.aboutLocal,
                 textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -89,7 +92,7 @@ class _AboutScreenState extends State<AboutScreen> {
               Row(
                 children: [
                   Text(
-                    "Developed with ❤️ by",
+                    l10n.developedBy,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       fontWeight: FontWeight.bold,
@@ -107,13 +110,13 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               const SizedBox(height: AppSizes.padding / 2),
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: AlignmentDirectional.centerStart,
                 child: GestureDetector(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "GitHub",
+                        l10n.github,
                         textAlign: TextAlign.justify,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: Theme.of(context).colorScheme.primary,
@@ -135,13 +138,13 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               const SizedBox(height: AppSizes.padding / 4),
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: AlignmentDirectional.centerStart,
                 child: GestureDetector(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Website",
+                        l10n.website,
                         textAlign: TextAlign.justify,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: Theme.of(context).colorScheme.primary,

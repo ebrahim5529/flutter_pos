@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/routes/app_routes.dart';
+import '../../core/locale/l10n/app_localizations.dart';
 import '../../core/themes/app_sizes.dart';
 import 'app_button.dart';
 import 'app_progress_indicator.dart';
@@ -66,7 +67,7 @@ class AppDialog {
     String? title,
     String? message,
     String? error,
-    String buttonText = 'Close',
+    String? buttonText,
     Function(BuildContext)? onTapButton,
   }) async {
     final context = AppRoutes.rootNavigatorKey.currentContext;
@@ -76,16 +77,18 @@ class AppDialog {
       context: context,
       barrierDismissible: false,
       builder: (context) {
+        final l10n = AppLocalizations.of(context);
+
         return PopScope(
           canPop: false,
           child: AppDialogWidget(
-            title: title ?? 'Oops!',
-            leftButtonText: buttonText,
+            title: title ?? l10n.oops,
+            leftButtonText: buttonText ?? l10n.close,
             onTapLeftButton: onTapButton,
             child: Column(
               children: [
                 Text(
-                  message ?? 'Something went wrong, please contact your system administrator or try restart the app',
+                  message ?? l10n.somethingWentWrongAdmin,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),

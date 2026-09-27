@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/di/app_providers.dart';
+import '../../../core/utilities/console_logger.dart';
 import '../../../domain/usecases/user_usecases.dart';
 import '../auth/auth_notifier.dart';
 import '../products/products_notifier.dart';
@@ -23,8 +24,13 @@ class MainNotifier extends Notifier<MainState> {
   }
 
   Future<void> initMainProvider() async {
-    await startPingService();
     await loadCurrentUser();
+
+    try {
+      await startPingService();
+    } catch (e) {
+      cl('Failed to start connectivity check: $e');
+    }
   }
 
   Future<void> startPingService() async {

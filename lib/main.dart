@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app.dart';
@@ -16,7 +17,9 @@ void main() async {
   await DatabaseService.instance.init();
 
   // Initialize date formatting
-  await initializeDateFormatting();
+  await initializeDateFormatting('ar');
+  await initializeDateFormatting('en');
+  Intl.defaultLocale = 'ar';
 
   // Initialize shared preferences
   final sharedPreferences = await SharedPreferences.getInstance();
